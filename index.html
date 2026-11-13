@@ -50,6 +50,25 @@ h3{font-size:1.24rem;line-height:1.2}
 .app-copy{display:grid;gap:6px}
 .app-icon{display:grid;place-items:center;width:52px;aspect-ratio:1;border-radius:12px;background:var(--tone,#e7eedb);color:#273423;font-size:1.45rem;font-family:Georgia,serif}
 .app-icon img{width:100%;border-radius:inherit}
+.hero{position:relative;isolation:isolate;overflow:hidden}
+.hero-orbit{position:absolute;z-index:-1;right:5%;top:13%;width:min(38vw,350px);aspect-ratio:1;border-radius:50%;border:1px solid #9ba691;background:radial-gradient(circle at 38% 30%,#e8eacb,#cedbc2 55%,#a8c2a6);box-shadow:0 0 0 18px #b8c9aa30,0 0 0 38px #b8c9aa18;animation:float 7s ease-in-out infinite alternate}
+.hero-orbit::after{content:"";position:absolute;inset:12%;border-radius:50%;border:1px dashed #47684880}
+@keyframes float{to{transform:translate(-8px,14px) rotate(12deg)}}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.pill,.filter{font:inherit;font-size:.9rem;font-weight:700;border:1px solid var(--line);border-radius:100px;padding:10px 15px;background:#fffdf8;color:var(--ink);cursor:pointer}
+.pill:first-child,.filter[aria-pressed="true"]{background:var(--accent);color:white;border-color:var(--accent)}
+.pill:hover,.filter:hover{border-color:var(--accent)}
+.filter:focus-visible{outline:3px solid #557249;outline-offset:4px}
+.filters[hidden]{display:none}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.app[hidden]{display:none}
+.app:where(article):hover{transform:none}
+.app-copy h3{overflow-wrap:anywhere}
+.app-icon{transition:transform .25s ease}
+.app:hover .app-icon{transform:rotate(-8deg) scale(1.08)}
+.card.enter{animation:arrive .45s ease-out both}
+@media(max-width:680px){.hero-orbit{right:-8%;top:12%;opacity:.5}}
+@media(prefers-reduced-motion:reduce){.app:hover .app-icon{transform:none}}
 footer{border-top:1px solid var(--line);font-size:.9rem;color:var(--soft)}
 @keyframes arrive{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:680px){.wrap{width:calc(100% - 32px)}.web-grid,.app-grid{grid-template-columns:1fr}.art{min-height:170px}.brand{max-width:10ch}.body{padding:18px}}
@@ -67,8 +86,10 @@ footer{border-top:1px solid var(--line);font-size:.9rem;color:var(--soft)}
 </header>
 <main class="wrap">
 <div class="hero">
+<div class="hero-orbit" aria-hidden="true"></div>
 <h1>Sagar <em>Tiwari.</em></h1>
 <p>I build websites and Android apps for learning, daily practice, and play.</p>
+<div class="hero-actions"><a class="pill" href="#websites">Explore websites ↓</a><a class="pill" href="#apps">Browse apps ↓</a></div>
 </div>
 <section id="websites" aria-labelledby="websites-heading">
 <div class="section-head"><h2 id="websites-heading">Websites</h2></div>
@@ -84,27 +105,67 @@ footer{border-top:1px solid var(--line);font-size:.9rem;color:var(--soft)}
 </div>
 </section>
 <section id="apps" aria-labelledby="apps-heading">
-<div class="section-head"><h2 id="apps-heading">Android apps</h2><span>Google Play</span></div>
+<div class="section-head"><h2 id="apps-heading">Android apps</h2></div>
+<div class="filters" role="group" aria-label="Filter apps" hidden>
+<button class="filter" type="button" aria-pressed="true" data-filter="all">All</button>
+<button class="filter" type="button" aria-pressed="false" data-filter="devotion">Devotion</button>
+<button class="filter" type="button" aria-pressed="false" data-filter="games">Games</button>
+<button class="filter" type="button" aria-pressed="false" data-filter="tools">Tools</button>
+</div>
 <div class="app-grid">
-<a class="card app" href="https://play.google.com/store/apps/details?id=com.sagartiwari.jaapsaathi">
+<a class="card app" data-category="devotion" href="https://play.google.com/store/apps/details?id=com.sagartiwari.jaapsaathi">
 <span class="app-icon" style="--tone:#f5dfbd" aria-hidden="true">ॐ</span>
 <div class="app-copy"><h3>Jaap Saathi</h3><p>A digital mala for daily naam jap and mantra counting.</p><span class="action">View on Google Play ↗</span></div>
 </a>
-<a class="card app" href="https://play.google.com/store/apps/details?id=com.bhajandhara.app">
+<a class="card app" data-category="devotion" href="https://play.google.com/store/apps/details?id=com.bhajandhara.app">
 <span class="app-icon" style="--tone:#f4d9cf" aria-hidden="true">♪</span>
 <div class="app-copy"><h3>BhajanDhara</h3><p>Bhajans and devotional lyrics on Android.</p><span class="action">View on Google Play ↗</span></div>
 </a>
-<a class="card app" href="https://play.google.com/store/apps/details?id=com.sagartiwari.arrowdungeon">
+<a class="card app" data-category="games" href="https://play.google.com/store/apps/details?id=com.sagartiwari.arrowdungeon">
 <span class="app-icon" style="--tone:#e7dff3" aria-hidden="true">➶</span>
 <div class="app-copy"><h3>Arrow Dungeon</h3><p>An Android game.</p><span class="action">View on Google Play ↗</span></div>
 </a>
-<a class="card app" href="https://play.google.com/store/apps/details?id=com.sagartiwari.sudoku">
+<a class="card app" data-category="games" href="https://play.google.com/store/apps/details?id=com.sagartiwari.sudoku">
 <span class="app-icon" aria-hidden="true">▦</span>
-<div class="app-copy"><h3>Sudoku</h3><p>Number puzzles on Android.</p><span class="action">View on Google Play ↗</span></div>
+<div class="app-copy"><h3>Sudoku: Daily Logic</h3><p>Number puzzles on Android.</p><span class="action">View on Google Play ↗</span></div>
 </a>
+<article class="card app" data-category="tools">
+<span class="app-icon" style="--tone:#f2e2bb" aria-hidden="true">◉</span>
+<div class="app-copy"><h3>Daily Plate</h3><p>A food app for Android.</p></div>
+</article>
+<article class="card app" data-category="tools">
+<span class="app-icon" style="--tone:#dce8ee" aria-hidden="true">▤</span>
+<div class="app-copy"><h3>ScanKite: Doc & PDF Scanner</h3><p>Scan documents and save them as PDFs.</p></div>
+</article>
+<article class="card app" data-category="games">
+<span class="app-icon" style="--tone:#dde9d9" aria-hidden="true">◇</span>
+<div class="app-copy"><h3>Trailworks: 3D Maze Puzzle</h3><p>Find your way through 3D mazes.</p></div>
+</article>
+<article class="card app" data-category="games">
+<span class="app-icon" style="--tone:#d9e9e7" aria-hidden="true">≈</span>
+<div class="app-copy"><h3>Trash Island Resort</h3><p>An Android game.</p></div>
+</article>
 </div>
 </section>
 </main>
 <footer><div class="wrap footer-inner"><span>Sagar Tiwari</span><a href="#top">Back to top ↑</a></div></footer>
+<script>
+const filters = document.querySelector('.filters');
+const buttons = [...filters.querySelectorAll('button')];
+const apps = [...document.querySelectorAll('.app')];
+filters.hidden = false;
+filters.addEventListener('click', event => {
+  const selected = event.target.closest('button[data-filter]');
+  if (!selected || selected.getAttribute('aria-pressed') === 'true') return;
+  for (const button of buttons) {
+    button.setAttribute('aria-pressed', String(button === selected));
+  }
+  for (const app of apps) {
+    const show = selected.dataset.filter === 'all' || app.dataset.category === selected.dataset.filter;
+    app.classList.toggle('enter', show && app.hidden);
+    app.hidden = !show;
+  }
+});
+</script>
 </body>
 </html>
