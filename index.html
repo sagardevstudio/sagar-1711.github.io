@@ -10,6 +10,32 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
+:root{--paper:#101510!important;--ink:#eef2df!important;--soft:#b5c1ad!important;--line:#344333!important;--accent:#cbef84!important}
+body{background-image:radial-gradient(ellipse at 90% 0%,#29472c55,transparent 55%)!important}
+header{position:relative;z-index:2}
+.hero{min-height:540px;display:flex;flex-direction:column;justify-content:center}
+.hero h1{max-width:8ch;font-size:clamp(5rem,13vw,10rem)}
+.hero-orbit{right:6%!important;top:22%!important;background:radial-gradient(circle at 30% 25%,#d9f4a8,#7ba55b 45%,#1b3526 80%)!important;box-shadow:0 0 90px #a5d97625!important}
+.hero-orbit::after{inset:-17%!important;transform:rotate(-28deg) scaleY(.45);border:2px solid #c5ef8a!important}
+.card{background:#1b231b!important;border-radius:24px!important}
+.card:hover{box-shadow:0 18px 45px #0005!important}
+.action{color:#c9eb95!important}
+.pill,.filter{background:#202b20!important;color:#eff4e6!important}
+.pill:first-child,.filter[aria-pressed="true"]{background:#cbef84!important;color:#192416!important}
+.devotion{background:radial-gradient(circle at 40% 30%,#ffe3a6,#c98049)!important}
+.exam{background:radial-gradient(circle at 40% 30%,#d4eabd,#6b9b79)!important}
+.app{padding:25px!important;min-height:152px}
+section{padding-top:36px!important}
+.section-head{margin-bottom:30px!important}
+.app-icon{width:58px!important}
+.app-grid{gap:18px!important}
+.progress{position:fixed;left:0;top:0;height:3px;width:100%;transform:scaleX(0);transform-origin:left;background:#cbef84;z-index:10}
+.theme-toggle{font:inherit;border:1px solid var(--line);border-radius:50%;background:transparent;color:inherit;width:34px;height:34px;cursor:pointer}
+body.light{--paper:#f6f4ee!important;--ink:#20281e!important;--soft:#4e584b!important;--line:#d8dbce!important;--accent:#334e32!important}
+body.light .card{background:#fffdf8!important}
+body.light .action{color:#334e32!important}
+@media(max-width:680px){.hero{min-height:480px}.hero-orbit{opacity:.32!important;width:220px!important;right:-20%!important}.app{min-height:130px}}
+
 :root{color-scheme:light;--paper:#f6f4ee;--ink:#20281e;--soft:#4e584b;--line:#d8dbce;--accent:#334e32}
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -73,16 +99,42 @@ footer{border-top:1px solid var(--line);font-size:.9rem;color:var(--soft)}
 @keyframes arrive{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:680px){.wrap{width:calc(100% - 32px)}.web-grid,.app-grid{grid-template-columns:1fr}.art{min-height:170px}.brand{max-width:10ch}.body{padding:18px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.card:hover,.card:focus-visible,.card:hover .mark{transform:none}}
+
+:root{--paper:#f5f5f7!important;--ink:#1d1d1f!important;--soft:#515154!important;--line:#d2d2d7!important;--accent:#0066cc!important}
+body{background-image:none!important;font-family:Inter,"Instrument Sans",sans-serif}
+body.dark{--paper:#101012!important;--ink:#f5f5f7!important;--soft:#b9b9be!important;--line:#404045!important;--accent:#80bbff!important}
+header{align-items:center}
+nav{align-items:center}
+.hero{text-align:center;align-items:center;min-height:570px}
+.hero h1{max-width:none;font-family:inherit;font-size:clamp(3.4rem,9vw,8rem);font-weight:700;letter-spacing:-.075em;line-height:.98}
+.hero h1 em{font-style:normal;font-weight:inherit;color:inherit}
+.hero p{max-width:44ch}
+.hero-orbit{right:50%!important;top:8%!important;width:min(86%,600px)!important;transform:translateX(50%);border:0;background:radial-gradient(ellipse,#a7caff6b,transparent 68%)!important;box-shadow:none!important;animation:halo 4s ease-in-out 2 alternate!important;opacity:1!important}
+.hero-orbit::after{display:none}
+@keyframes halo{to{transform:translateX(50%) scale(1.14);opacity:.5}}
+.section-head h2{font-family:inherit;font-size:clamp(2rem,5vw,3.5rem);font-weight:700;letter-spacing:-.055em}
+.card{background:#fff!important}
+body.dark .card{background:#1d1d20!important}
+.action{color:var(--accent)!important}
+.pill,.filter{background:transparent!important;color:var(--ink)!important}
+.pill:first-child,.filter[aria-pressed="true"]{background:var(--accent)!important;color:white!important;border-color:var(--accent)}
+body.dark .pill:first-child,body.dark .filter[aria-pressed="true"]{color:#111!important}
+.progress{background:var(--accent)}
+.devotion{background:linear-gradient(140deg,#fff3df,#ffc888)!important}
+.exam{background:linear-gradient(140deg,#e5f2ff,#a9c7ff)!important;color:#15396a}
+@media(max-width:680px){.hero{min-height:440px}.hero h1{font-size:clamp(3rem,11vw,5rem)}header{flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){.hero-orbit{animation:none!important}}
 </style>
 </head>
 <body id="top">
+<div class="progress" aria-hidden="true"></div>
 <header class="wrap">
-<a class="brand" href="#top">Sagar Tiwari</a>
+<a class="brand" href="#top">Sagar Tiwari<span style="display:block;font-size:.7rem;font-weight:400;opacity:.65;margin-top:4px">sagardevstudio</span></a>
 <nav aria-label="Main navigation">
 <a href="#websites">Websites</a>
 <a href="#apps">Apps</a>
 <a href="https://www.linkedin.com/in/sagar-tiwari1711/">LinkedIn ↗</a>
-</nav>
+<button class="theme-toggle" type="button" aria-label="Switch to dark theme">◐</button></nav>
 </header>
 <main class="wrap">
 <div class="hero">
@@ -150,6 +202,30 @@ footer{border-top:1px solid var(--line);font-size:.9rem;color:var(--soft)}
 </main>
 <footer><div class="wrap footer-inner"><span>Sagar Tiwari</span><a href="#top">Back to top ↑</a></div></footer>
 <script>
+const themeToggle = document.querySelector('.theme-toggle');
+themeToggle.addEventListener('click', () => {
+  const dark = document.body.classList.toggle('dark');
+  themeToggle.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+});
+const progress = document.querySelector('.progress');
+function updateProgress() {
+  const range = document.documentElement.scrollHeight - innerHeight;
+  progress.style.transform = 'scaleX(' + (range > 0 ? scrollY / range : 0) + ')';
+}
+addEventListener('scroll', updateProgress, { passive: true });
+addEventListener('resize', updateProgress);
+updateProgress();
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const observer = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        entry.target.animate([{opacity:0,transform:'translateY(24px)'},{opacity:1,transform:'translateY(0)'}], {duration:550,easing:'ease-out'});
+        observer.unobserve(entry.target);
+      }
+    }
+  }, {threshold:0.12});
+  document.querySelectorAll('.card').forEach(card => observer.observe(card));
+}
 const filters = document.querySelector('.filters');
 const buttons = [...filters.querySelectorAll('button')];
 const apps = [...document.querySelectorAll('.app')];
